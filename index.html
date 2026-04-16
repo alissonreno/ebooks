@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de E-books - Alisson</title>
+    <style>
+        :root {
+            --primary: #1a2530;
+            --accent: #2c5aa0;
+            --bg: #f5f7fa;
+            --text: #2d3748;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        header {
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 2.5rem 1rem;
+            text-align: center;
+        }
+        header h1 { margin: 0; font-size: 2rem; font-weight: 600; }
+        header p { margin-top: 0.5rem; opacity: 0.9; font-size: 1.05rem; }
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        .ebooks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .ebook-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .ebook-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+        }
+        .ebook-img {
+            width: 100%;
+            height: 200px;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-style: italic;
+        }
+        .ebook-content { padding: 1.25rem; }
+        .ebook-content h3 { margin: 0 0 0.5rem; color: var(--primary); }
+        .ebook-content p { margin: 0 0 1rem; font-size: 0.95rem; }
+        .price {
+            display: block;
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: #ffffff;
+            padding: 0.65rem 1.2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            text-align: center;
+            width: 100%;
+        }
+        .btn:hover { background-color: #1e407a; }
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            background-color: var(--primary);
+            color: #ffffff;
+            margin-top: 3rem;
+            font-size: 0.95rem;
+        }
+        footer a { color: #90cdf4; text-decoration: none; }
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.6rem; }
+            .section-title { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Catálogo de E-books</h1>
+        <p>Produções autorais de Alisson</p>
+    </header>
+
+    <main class="container">
+        <h2 class="section-title">Disponíveis para Aquisição</h2>
+        <div class="ebooks-grid">
+
+            <!-- E-book 01 -->
+            <article class="ebook-card">
+                <div class="ebook-img">Inserir imagem da capa</div>
+                <div class="ebook-content">
+                    <h3>Guia Prático: Como Criar e Vender E-books na Kiwify</h3>
+                    <p>Do zero à primeira venda em 7 dias. Método validado para iniciantes.</p>
+                    <span class="price">R$ 27,90</span>
+                    <a href="LINK_REAL_DE_PAGAMENTO_OU_DOWNLOAD" class="btn" target="_blank" rel="noopener">Adquirir Agora</a>
+                </div>
+            </article>
+
+            <!-- E-book 02 -->
+            <article class="ebook-card">
+                <div class="ebook-img">Inserir imagem da capa</div>
+                <div class="ebook-content">
+                    <h3>Título do Segundo E-book</h3>
+                    <p>Descrição objetiva sobre o tema, o público-alvo e os benefícios proporcionados pela leitura.</p>
+                    <span class="price">R$ 39,90</span>
+                    <a href="LINK_REAL_DE_PAGAMENTO_OU_DOWNLOAD" class="btn" target="_blank" rel="noopener">Adquirir Agora</a>
+                </div>
+            </article>
+
+            <!-- E-book 03 -->
+            <article class="ebook-card">
+                <div class="ebook-img">Inserir imagem da capa</div>
+                <div class="ebook-content">
+                    <h3>Título do Terceiro E-book</h3>
+                    <p>Descrição objetiva sobre o tema, o público-alvo e os benefícios proporcionados pela leitura.</p>
+                    <span class="price">R$ 19,90</span>
+                    <a href="LINK_REAL_DE_PAGAMENTO_OU_DOWNLOAD" class="btn" target="_blank" rel="noopener">Adquirir Agora</a>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Alisson. Todos os direitos reservados.</p>
+        <p>Contato: <a href="mailto:seuemail@dominio.com">seuemail@dominio.com</a></p>
+    </footer>
+
+</body>
+</html>
