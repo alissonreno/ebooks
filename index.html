@@ -5,43 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Habilidades Digitais BR - E-books práticos para você ganhar dinheiro online. Comece do zero em 24h.">
     <title>Habilidades Digitais BR | E-books Oficiais</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
     <style>
         :root {
+            /* Cores da Marca - Edite aqui para alterar em todo o site */
             --primary: #0f172a;
             --primary-light: #1e293b;
             --accent: #2563eb;
             --accent-hover: #1d4ed8;
-            --kiwify: #7c3aed; /* Roxo próximo à identidade Kiwify */
+            --kiwify: #7c3aed;
+            --kiwify-light: #8b5cf6;
             --bg: #f8fafc;
             --card-bg: #ffffff;
             --text: #334155;
             --text-light: #64748b;
             --border: #e2e8f0;
             --success: #10b981;
-            --radius: 12px;
-            --shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
-            --shadow-hover: 0 12px 24px rgba(15, 23, 42, 0.12);
+            --warning: #f59e0b;
+            
+            /* Elementos de Design */
+            --radius: 14px;
+            --radius-sm: 8px;
+            --shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+            --shadow-hover: 0 16px 32px rgba(15, 23, 42, 0.15);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
         body {
-            font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background-color: var(--bg);
             color: var(--text);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
+
+        /* ANIMAÇÕES */
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4); } 70% { box-shadow: 0 0 0 16px rgba(124, 58, 237, 0); } 100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0); } }
+
+        .animate { animation: fadeInUp 0.6s ease forwards; opacity: 0; }
+        .animate:nth-child(1) { animation-delay: 0.1s; }
+        .animate:nth-child(2) { animation-delay: 0.2s; }
+        .animate:nth-child(3) { animation-delay: 0.3s; }
+        .animate:nth-child(4) { animation-delay: 0.4s; }
 
         /* NAV */
         nav {
-            background-color: var(--card-bg);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border);
-            padding: 1rem 0;
+            padding: 0.85rem 0;
             position: sticky;
             top: 0;
             z-index: 100;
+            transition: var(--transition);
         }
+        nav.scrolled { padding: 0.65rem 0; box-shadow: var(--shadow); }
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -52,139 +75,170 @@
         }
         .logo { 
             font-weight: 800; 
-            font-size: 1.25rem; 
+            font-size: 1.2rem; 
             color: var(--primary); 
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
+            text-decoration: none;
         }
-        .logo span { color: var(--kiwify); }
-        .nav-links { display: flex; gap: 1.5rem; }
+        .logo span { 
+            background: linear-gradient(135deg, var(--kiwify), var(--kiwify-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .nav-links { display: flex; gap: 1.75rem; }
         .nav-links a {
             text-decoration: none;
             color: var(--text-light);
             font-weight: 600;
             font-size: 0.95rem;
-            transition: color 0.2s;
+            transition: var(--transition);
+            position: relative;
         }
-        .nav-links a:hover { color: var(--accent); }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--kiwify);
+            transition: var(--transition);
+        }
+        .nav-links a:hover { color: var(--kiwify); }
+        .nav-links a:hover::after { width: 100%; }
 
         /* HERO */
         .hero {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             color: #ffffff;
-            padding: 4rem 1.5rem;
+            padding: clamp(3rem, 8vw, 5rem) 1.5rem;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
-        .hero::after {
+        .hero::before {
             content: '';
             position: absolute;
             top: -50%;
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            background: radial-gradient(ellipse at center, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
             pointer-events: none;
         }
-        .hero-content { position: relative; z-index: 1; }
+        .hero-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
         .hero h1 {
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin-bottom: 1rem;
-            line-height: 1.2;
+            font-size: clamp(1.8rem, 5.5vw, 3.2rem);
+            margin-bottom: 1.25rem;
+            line-height: 1.15;
             font-weight: 800;
+            letter-spacing: -0.02em;
         }
         .hero p {
-            font-size: 1.15rem;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
             opacity: 0.95;
-            max-width: 700px;
             margin: 0 auto 2rem;
             font-weight: 400;
+            max-width: 650px;
         }
         .hero-badges {
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 0.75rem;
             flex-wrap: wrap;
             margin-bottom: 2rem;
-            font-size: 0.9rem;
         }
         .badge {
             background: rgba(255,255,255,0.15);
-            padding: 0.4rem 1rem;
+            padding: 0.45rem 1.1rem;
             border-radius: 50px;
             display: flex;
             align-items: center;
             gap: 0.4rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            backdrop-filter: blur(4px);
         }
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background-color: var(--kiwify);
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--kiwify), var(--kiwify-light));
             color: #ffffff;
-            padding: 0.9rem 2rem;
+            padding: 0.95rem 2.2rem;
             text-decoration: none;
             border-radius: var(--radius);
             font-weight: 700;
-            transition: all 0.2s;
-            box-shadow: 0 4px 14px rgba(124, 58, 237, 0.4);
+            transition: var(--transition);
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.45);
             font-size: 1.05rem;
+            border: none;
+            cursor: pointer;
         }
         .btn:hover { 
-            background-color: #6d28d9; 
-            transform: translateY(-2px); 
-            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.6);
+            transform: translateY(-3px); 
+            box-shadow: 0 10px 28px rgba(124, 58, 237, 0.65);
         }
+        .btn:active { transform: translateY(-1px); }
         .btn-outline {
             background: transparent;
-            border: 2px solid rgba(255,255,255,0.5);
-            margin-left: 0.75rem;
+            border: 2px solid rgba(255,255,255,0.6);
+            color: #ffffff;
         }
         .btn-outline:hover { 
             border-color: #ffffff; 
             background: rgba(255,255,255,0.15); 
-            transform: translateY(-2px);
+        }
+        .btn-group { 
+            display: flex; 
+            justify-content: center; 
+            flex-wrap: wrap; 
+            gap: 0.75rem; 
+            margin-top: 1rem;
         }
 
         /* TRUST BAR */
         .trust-bar {
             background-color: var(--card-bg);
-            padding: 1rem;
+            padding: 1rem 1.5rem;
             border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 1.5rem;
+            gap: 1.75rem;
             font-size: 0.9rem;
             color: var(--text-light);
             font-weight: 500;
         }
-        .trust-item { display: flex; align-items: center; gap: 0.4rem; }
+        .trust-item { display: flex; align-items: center; gap: 0.45rem; }
+        .trust-item span { font-size: 1.1rem; }
 
         /* CATALOG */
         .section {
             max-width: 1200px;
-            margin: 3rem auto;
+            margin: 3.5rem auto;
             padding: 0 1.5rem;
         }
+        .section-header { text-align: center; margin-bottom: 2.5rem; }
         .section-title {
-            text-align: center;
-            font-size: 1.75rem;
+            font-size: clamp(1.5rem, 4vw, 2rem);
             color: var(--primary);
-            margin-bottom: 0.5rem;
-            font-weight: 700;
+            margin-bottom: 0.75rem;
+            font-weight: 800;
         }
         .section-subtitle {
-            text-align: center;
             color: var(--text-light);
-            margin-bottom: 2.5rem;
             font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
         }
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
             gap: 2rem;
         }
         .card {
@@ -192,40 +246,65 @@
             border-radius: var(--radius);
             overflow: hidden;
             box-shadow: var(--shadow);
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: var(--transition);
             display: flex;
             flex-direction: column;
             border: 1px solid var(--border);
+            position: relative;
         }
-        .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); border-color: var(--kiwify); }
+        .card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: var(--shadow-hover); 
+            border-color: var(--kiwify-light);
+        }
         .card-badge {
             position: absolute;
             top: 1rem;
             right: 1rem;
-            background: var(--success);
+            background: linear-gradient(135deg, var(--success), #059669);
             color: white;
-            padding: 0.25rem 0.75rem;
+            padding: 0.3rem 0.85rem;
             border-radius: 50px;
             font-size: 0.8rem;
             font-weight: 700;
             z-index: 2;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+        .card-badge.urgency {
+            background: linear-gradient(135deg, var(--warning), #d97706);
+            animation: pulse 2s infinite;
         }
         .card-img {
             width: 100%;
-            height: 240px;
+            height: 260px;
             background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-light);
             position: relative;
             overflow: hidden;
         }
-        .card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
-        .card:hover .card-img img { transform: scale(1.05); }
+        .card-img img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            transition: transform 0.4s ease;
+        }
+        .card:hover .card-img img { transform: scale(1.06); }
         .card-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
-        .card-title { font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--primary); font-weight: 700; line-height: 1.3; }
-        .card-desc { color: var(--text-light); font-size: 0.95rem; margin-bottom: 1.25rem; flex: 1; }
+        .card-title { 
+            font-size: 1.25rem; 
+            margin-bottom: 0.75rem; 
+            color: var(--primary); 
+            font-weight: 700; 
+            line-height: 1.3;
+        }
+        .card-desc { 
+            color: var(--text-light); 
+            font-size: 0.95rem; 
+            margin-bottom: 1.25rem; 
+            flex: 1;
+        }
         .price-box { 
             display: flex; 
             align-items: center; 
@@ -235,24 +314,33 @@
             border-top: 1px dashed var(--border);
         }
         .price { 
-            font-size: 1.5rem; 
+            font-size: 1.6rem; 
             font-weight: 800; 
-            color: var(--primary); 
+            color: var(--primary);
+            display: flex;
+            align-items: baseline;
+            gap: 0.3rem;
         }
         .price small { font-size: 0.9rem; font-weight: 400; color: var(--text-light); }
         .card-btn {
             display: block;
             width: 100%;
-            padding: 0.85rem;
-            background-color: var(--primary);
+            padding: 0.9rem;
+            background: var(--primary);
             color: #ffffff;
             text-align: center;
             text-decoration: none;
-            border-radius: var(--radius);
+            border-radius: var(--radius-sm);
             font-weight: 700;
-            transition: background 0.2s;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
         }
-        .card-btn:hover { background-color: var(--kiwify); }
+        .card-btn:hover { 
+            background: var(--kiwify); 
+            transform: translateY(-2px);
+        }
 
         /* AFFILIATES */
         .affiliate {
@@ -262,118 +350,166 @@
             text-align: center;
             border: 1px solid #bae6fd;
             margin: 3rem 1.5rem;
+            position: relative;
+            overflow: hidden;
         }
-        .affiliate h2 { color: var(--primary); margin-bottom: 1rem; font-size: 1.5rem; }
-        .affiliate p { max-width: 800px; margin: 0 auto 1.5rem; color: var(--text); font-size: 1.05rem; }
+        .affiliate::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .affiliate h2 { color: var(--primary); margin-bottom: 1rem; font-size: 1.6rem; position: relative; }
+        .affiliate p { max-width: 750px; margin: 0 auto 2rem; color: var(--text); font-size: 1.05rem; position: relative; }
         .steps {
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 1.25rem;
             flex-wrap: wrap;
-            margin-bottom: 2rem;
+            margin-bottom: 2.25rem;
+            position: relative;
         }
         .step {
             background: var(--card-bg);
-            padding: 1rem;
-            border-radius: var(--radius);
-            width: 180px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            padding: 1.25rem;
+            border-radius: var(--radius-sm);
+            width: 190px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
             border: 1px solid var(--border);
+            transition: var(--transition);
         }
+        .step:hover { transform: translateY(-4px); border-color: var(--accent); }
         .step-number {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 36px;
-            height: 36px;
-            background: var(--kiwify);
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
             color: #ffffff;
             border-radius: 50%;
             font-weight: 800;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
         }
-        .step h4 { margin-bottom: 0.25rem; font-weight: 600; }
-        .step p { font-size: 0.85rem; color: var(--text-light); }
+        .step h4 { margin-bottom: 0.35rem; font-weight: 700; color: var(--primary); }
+        .step p { font-size: 0.875rem; color: var(--text-light); margin: 0; }
 
         /* TESTIMONIALS */
-        .testimonials { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .testimonials { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.75rem; }
         .testimonial {
             background: var(--card-bg);
-            padding: 1.5rem;
+            padding: 1.75rem;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
             border-left: 4px solid var(--kiwify);
+            transition: var(--transition);
         }
-        .testimonial-text { font-style: italic; color: var(--text); margin-bottom: 1rem; }
+        .testimonial:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+        .testimonial-text { font-style: italic; color: var(--text); margin-bottom: 1.25rem; line-height: 1.7; }
         .testimonial-author { font-weight: 700; color: var(--primary); font-size: 0.95rem; }
         .testimonial-role { font-size: 0.85rem; color: var(--text-light); }
+        .stars { color: var(--warning); margin-bottom: 0.75rem; font-size: 1.1rem; }
 
         /* FOOTER */
         footer {
-            background-color: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             color: #cbd5e1;
-            padding: 3rem 1.5rem;
+            padding: 3.5rem 1.5rem 2rem;
             text-align: center;
             margin-top: 4rem;
         }
-        footer .brand { font-weight: 700; color: #ffffff; font-size: 1.2rem; margin-bottom: 1rem; display: block; }
-        footer a { color: #93c5fd; text-decoration: none; transition: color 0.2s; }
-        footer a:hover { color: #ffffff; text-decoration: underline; }
-        .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin: 1.5rem 0; flex-wrap: wrap; }
+        footer .brand { 
+            font-weight: 800; 
+            color: #ffffff; 
+            font-size: 1.3rem; 
+            margin-bottom: 1rem; 
+            display: block;
+        }
+        footer .brand span {
+            background: linear-gradient(135deg, var(--kiwify), var(--kiwify-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        footer a { color: #93c5fd; text-decoration: none; transition: var(--transition); }
+        footer a:hover { color: #ffffff; }
+        .footer-links { display: flex; justify-content: center; gap: 1.25rem; margin: 1.75rem 0; flex-wrap: wrap; }
         .social-link {
             display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.45rem;
             background: rgba(255,255,255,0.1);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
+            padding: 0.6rem 1.1rem;
+            border-radius: var(--radius-sm);
             font-weight: 500;
+            transition: var(--transition);
         }
-        .social-link:hover { background: rgba(255,255,255,0.2); text-decoration: none; }
+        .social-link:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
+        .footer-note { margin-top: 2rem; font-size: 0.85rem; opacity: 0.75; line-height: 1.6; }
 
         /* WHATSAPP FLOAT */
         .whatsapp-float {
             position: fixed;
-            bottom: 24px;
-            right: 24px;
-            background-color: var(--success);
+            bottom: 28px;
+            right: 28px;
+            background: linear-gradient(135deg, var(--success), #059669);
             color: #ffffff;
-            width: 60px;
-            height: 60px;
+            width: 64px;
+            height: 64px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
-            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+            font-size: 34px;
+            box-shadow: 0 6px 24px rgba(16, 185, 129, 0.45);
             text-decoration: none;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: var(--transition);
             z-index: 99;
-            animation: pulse 2s infinite;
+            animation: pulse 2.5s infinite;
         }
-        .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 6px 24px rgba(16, 185, 129, 0.6); }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-            70% { box-shadow: 0 0 0 12px rgba(16, 185, 129, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        .whatsapp-float:hover { transform: scale(1.1) rotate(5deg); box-shadow: 0 8px 32px rgba(16, 185, 129, 0.65); }
+        .whatsapp-tooltip {
+            position: absolute;
+            bottom: 75px;
+            right: 0;
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: var(--transition);
+            pointer-events: none;
         }
+        .whatsapp-float:hover .whatsapp-tooltip { opacity: 1; bottom: 80px; }
 
+        /* MOBILE */
         @media (max-width: 600px) {
             .nav-links { display: none; }
-            .hero h1 { font-size: 1.75rem; }
+            .hero h1 { font-size: 1.8rem; }
             .steps { flex-direction: column; align-items: center; }
             .trust-bar { gap: 1rem; font-size: 0.85rem; }
-            .btn { width: 100%; margin: 0.5rem 0; }
-            .btn-outline { margin-left: 0; }
+            .btn { width: 100%; }
+            .btn-group { flex-direction: column; align-items: center; }
+            .btn-outline { width: 100%; }
+            .affiliate { margin: 2rem 1rem; padding: 2rem 1.5rem; }
         }
+
+        /* SCROLL REVEAL */
+        .reveal { opacity: 0; transform: translateY(32px); transition: all 0.6s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
 
-    <nav>
+    <nav id="navbar">
         <div class="nav-container">
-            <div class="logo">💻 Habilidades <span>Digitais BR</span></div>
+            <a href="#" class="logo">💻 Habilidades <span>Digitais BR</span></a>
             <div class="nav-links">
                 <a href="#catalogo">E-books</a>
                 <a href="#afiliados">Afiliados</a>
@@ -384,72 +520,79 @@
 
     <header class="hero">
         <div class="hero-content">
-            <div class="hero-badges">
+            <div class="hero-badges animate">
                 <div class="badge">🔥 Comece do zero em 24h</div>
-                <div class="badge">📚 Método passo a passo</div>
+                <div class="badge">📚 Método 100% prático</div>
             </div>
-            <h1>Te ensino a ganhar dinheiro online com e-books práticos</h1>
-            <p>Estratégias validadas, do básico ao avançado. Transforme conhecimento em renda recorrente.</p>
-            <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 0.5rem;">
-                <a href="#catalogo" class="btn">Ver E-books Disponíveis</a>
-                <a href="#afiliados" class="btn btn-outline">Quero ser Afiliado</a>
+            <h1 class="animate">Transforme Conhecimento em Renda Online com E-books</h1>
+            <p class="animate">Estratégias validadas, do básico ao avançado. Aprenda a criar, publicar e vender seus primeiros produtos digitais com segurança e resultado.</p>
+            <div class="btn-group animate">
+                <a href="#catalogo" class="btn">🛒 Ver E-books Disponíveis</a>
+                <a href="#afiliados" class="btn btn-outline">🤝 Quero ser Afiliado</a>
             </div>
         </div>
     </header>
 
     <div class="trust-bar">
-        <div class="trust-item">⚡ Acesso Imediato</div>
-        <div class="trust-item">🔒 Compra Segura (Kiwify)</div>
-        <div class="trust-item">🎓 Suporte ao Aluno</div>
-        <div class="trust-item">✅ Garantia de 7 Dias</div>
+        <div class="trust-item"><span>⚡</span> Acesso Imediato</div>
+        <div class="trust-item"><span>🔒</span> Pagamento Seguro (Kiwify)</div>
+        <div class="trust-item"><span>🎓</span> Suporte Direto</div>
+        <div class="trust-item"><span>✅</span> Garantia de 7 Dias</div>
     </div>
 
     <main id="catalogo" class="section">
-        <h2 class="section-title">Nossos Materiais</h2>
-        <p class="section-subtitle">Conteúdo prático e direto ao ponto para você aplicar hoje mesmo.</p>
+        <div class="section-header reveal">
+            <h2 class="section-title">Nossos E-books</h2>
+            <p class="section-subtitle">Conteúdo prático, atualizado e pronto para aplicar. Escolha o seu e comece hoje mesmo.</p>
+        </div>
         <div id="ebooks-grid" class="grid"></div>
     </main>
 
-    <section id="afiliados" class="section">
+    <section id="afiliados" class="section reveal">
         <div class="affiliate">
-            <h2>🚀 Programa de Afiliados</h2>
-            <p>Divulgue nossos e-books e ganhe comissões atrativas. Você recebe o link exclusivo, materiais de divulgação e acompanhamento de resultados.</p>
+            <h2>🚀 Programa de Afiliados Habilidades Digitais BR</h2>
+            <p>Divulgue nossos e-books e ganhe comissões de até <strong>50%</strong> por venda. Material de divulgação, links personalizados e dashboard de acompanhamento inclusos.</p>
             <div class="steps">
                 <div class="step">
                     <div class="step-number">1</div>
-                    <h4>Cadastre-se</h4>
-                    <p>Envie uma mensagem ou preencha o formulário.</p>
+                    <h4>Cadastro Rápido</h4>
+                    <p>Preencha o formulário ou chame no WhatsApp.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
-                    <h4>Receba Links</h4>
-                    <p>Links personalizados e materiais prontos para usar.</p>
+                    <h4>Receba Seu Kit</h4>
+                    <p>Links exclusivos, artes prontas e copy validada.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
-                    <h4>Lucre</h4>
-                    <p>Receba comissões por cada venda confirmada.</p>
+                    <h4>Monetize</h4>
+                    <p>Receba comissões automáticas por venda confirmada.</p>
                 </div>
             </div>
-            <a href="https://wa.me/5500000000000?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20o%20programa%20de%20afiliados%20da%20Habilidades%20Digitais%20BR!" class="btn" target="_blank" rel="noopener">Quero me Cadastrar como Afiliado</a>
+            <a href="https://wa.me/5500000000000?text=Olá!%20Gostaria%20de%20me%20cadastrar%20como%20afiliado%20da%20Habilidades%20Digitais%20BR." class="btn" target="_blank" rel="noopener">🔗 Quero Me Cadastrar Agora</a>
         </div>
     </section>
 
     <section id="depoimentos" class="section">
-        <h2 class="section-title">Quem já comprou, recomenda</h2>
-        <p class="section-subtitle">Resultados reais de quem aplicou o método.</p>
+        <div class="section-header reveal">
+            <h2 class="section-title">Quem Comprou, Recomenda</h2>
+            <p class="section-subtitle">Depoimentos reais de quem aplicou o método e teve resultados.</p>
+        </div>
         <div class="testimonials">
-            <div class="testimonial">
-                <p class="testimonial-text">"O guia é extremamente prático. Em 3 dias já tinha minha estrutura pronta na Kiwify. Recomendo demais!"</p>
+            <div class="testimonial reveal">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"O guia é extremamente prático. Em 3 dias já tinha minha estrutura pronta na Kiwify e fiz a primeira venda. Recomendo demais!"</p>
                 <div class="testimonial-author">Ana Clara M.</div>
                 <div class="testimonial-role">Iniciante no Digital</div>
             </div>
-            <div class="testimonial">
+            <div class="testimonial reveal">
+                <div class="stars">★★★★★</div>
                 <p class="testimonial-text">"Conteúdo direto, sem enrolação. O passo a passo da precificação me ajudou a ter lucro real desde a primeira venda."</p>
                 <div class="testimonial-author">Ricardo S.</div>
                 <div class="testimonial-role">Empreendedor Digital</div>
             </div>
-            <div class="testimonial">
+            <div class="testimonial reveal">
+                <div class="stars">★★★★★</div>
                 <p class="testimonial-text">"Suporte rápido e material atualizado. Já indiquei para três amigos que também estão começando agora."</p>
                 <div class="testimonial-author">Fernanda L.</div>
                 <div class="testimonial-role">Designer & Afiliada</div>
@@ -458,8 +601,8 @@
     </section>
 
     <footer id="contato">
-        <span class="brand">💻 Habilidades Digitais BR</span>
-        <p>Transformando conhecimento em resultados.</p>
+        <span class="brand">💻 Habilidades <span>Digitais BR</span></span>
+        <p>Transformando conhecimento em resultados reais.</p>
         
         <div class="footer-links">
             <a href="https://instagram.com/habilidadesdigitais.br" class="social-link" target="_blank" rel="noopener">
@@ -470,52 +613,78 @@
             </a>
         </div>
         
-        <p style="margin-top: 2rem; font-size: 0.85rem; opacity: 0.7;">
+        <p class="footer-note">
             &copy; 2026 Habilidades Digitais BR. Todos os direitos reservados.<br>
             Este site é um catálogo oficial. Todas as transações são processadas com segurança pela plataforma Kiwify.
         </p>
     </footer>
 
-    <a href="https://wa.me/5500000000000?text=Olá,%20vim%20pelo%20site%20e%20gostaria%20de%20informações%20sobre%20os%20e-books." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">💬</a>
+    <a href="https://wa.me/5500000000000?text=Olá,%20vim%20pelo%20site%20e%20gostaria%20de%20informações%20sobre%20os%20e-books." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+        💬
+        <span class="whatsapp-tooltip">Fale conosco!</span>
+    </a>
 
     <script>
         // =================================================================
-        // CONFIGURAÇÃO DOS E-BOOKS - HABILIDADES DIGITAIS BR
-        // Para adicionar novos itens: copie um bloco {...}, cole após o último,
-        // ajuste os campos e mantenha as vírgulas separando os itens.
+        // CONFIGURAÇÃO GERAL - EDITE AQUI PARA PERSONALIZAR O SITE
+        // =================================================================
+        const CONFIG = {
+            whatsapp: "5500000000000", // Substitua pelo seu número (55 + DDD + número)
+            instagram: "https://instagram.com/habilidadesdigitais.br",
+            email: "quintoventomkt@gmail.com",
+            kiwifyBase: "https://pay.kiwify.com.br"
+        };
+
+        // =================================================================
+        // CONFIGURAÇÃO DOS E-BOOKS
+        // Para adicionar: copie um bloco {...}, cole após o último e edite.
+        // Mantenha as vírgulas separando os itens.
         // =================================================================
         const ebooks = [
             {
                 id: 1,
                 titulo: "Guia Prático: Como Criar e Vender E-books na Kiwify",
-                descricao: "Do zero à primeira venda em 7 dias. Método validado para iniciantes que desejam entrar no mercado digital com segurança e estratégia.",
+                descricao: "Do zero à primeira venda em 7 dias. Método validado para iniciantes que desejam entrar no mercado digital com segurança, estratégia e resultados rápidos.",
                 preco: 27.90,
-                link: "https://pay.kiwify.com.br/Ga9lJ2E",
+                link: "https://pay.kiwify.com.br/iRIzPau", // ✅ LINK CORRIGIDO
                 capa: "https://placehold.co/400x500/7c3aed/ffffff?text=Guia+Kiwify\nHabilidades+Digitais",
-                destaque: true
+                destaque: true,
+                urgencia: true
             },
             {
                 id: 2,
                 titulo: "E-book Estratégico 02",
-                descricao: "Conteúdo exclusivo para acelerar seus resultados. Passo a passo prático, exemplos reais e aplicabilidade imediata.",
+                descricao: "Conteúdo exclusivo para acelerar seus resultados. Passo a passo prático, exemplos reais e aplicabilidade imediata para quem quer escalar.",
                 preco: 37.90,
                 link: "https://pay.kiwify.com.br/dX7cPL9?afid=RTjB9ohM",
                 capa: "https://placehold.co/400x500/2563eb/ffffff?text=E-book+02\nHabilidades+Digitais",
-                destaque: false
+                destaque: false,
+                urgencia: false
             }
-            // PARA ADICIONAR UM NOVO E-BOOK, COPIE O BLOCO ACIMA (de { a },), COLE AQUI EMBAIXO E EDITE OS DADOS.
+            // ➕ PARA ADICIONAR UM NOVO E-BOOK:
+            // 1. Copie um bloco acima (de { até },)
+            // 2. Cole aqui embaixo
+            // 3. Edite: id, titulo, descricao, preco, link, capa, destaque, urgencia
         ];
 
-        // Função de renderização automática
+        // =================================================================
+        // FUNÇÕES DO SISTEMA (NÃO É NECESSÁRIO EDITAR)
+        // =================================================================
+        
+        // Renderiza os e-books dinamicamente
         function renderEbooks() {
             const container = document.getElementById('ebooks-grid');
             const formatter = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
 
             container.innerHTML = ebooks.map(ebook => `
-                <article class="card">
-                    ${ebook.destaque ? '<span class="card-badge">MAIS VENDIDO</span>' : ''}
+                <article class="card animate">
+                    ${ebook.destaque ? '<span class="card-badge">⭐ MAIS VENDIDO</span>' : ''}
+                    ${ebook.urgencia ? '<span class="card-badge urgency">🔥 OFERTA</span>' : ''}
                     <div class="card-img">
-                        <img src="${ebook.capa}" alt="Capa: ${ebook.titulo}" loading="lazy">
+                        <img src="${ebook.capa}" 
+                             alt="Capa: ${ebook.titulo}" 
+                             loading="lazy"
+                             onerror="this.src='https://placehold.co/400x500/e2e8f0/334155?text=Habilidades+Digitais+BR'">
                     </div>
                     <div class="card-body">
                         <h3 class="card-title">${ebook.titulo}</h3>
@@ -523,14 +692,52 @@
                         <div class="price-box">
                             <div class="price">${formatter.format(ebook.preco)} <small>à vista</small></div>
                         </div>
-                        <a href="${ebook.link}" class="card-btn" target="_blank" rel="noopener">Comprar Agora na Kiwify</a>
+                        <a href="${ebook.link}" class="card-btn" target="_blank" rel="noopener">Comprar Agora na Kiwify →</a>
                     </div>
                 </article>
             `).join('');
         }
 
-        // Executa ao carregar a página
-        document.addEventListener('DOMContentLoaded', renderEbooks);
+        // Efeito de scroll na navbar
+        function handleNavScroll() {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        }
+
+        // Revelação de elementos ao rolar a página
+        function handleReveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    el.classList.add('active');
+                }
+            });
+        }
+
+        // Atualiza links do WhatsApp com o número configurado
+        function updateWhatsAppLinks() {
+            const whatsappLinks = document.querySelectorAll('a[href*="wa.me/5500000000000"]');
+            whatsappLinks.forEach(link => {
+                link.href = link.href.replace('5500000000000', CONFIG.whatsapp);
+            });
+        }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            renderEbooks();
+            updateWhatsAppLinks();
+            window.addEventListener('scroll', () => {
+                handleNavScroll();
+                handleReveal();
+            });
+            handleReveal(); // Verifica elementos visíveis no carregamento
+        });
     </script>
 </body>
 </html>
