@@ -151,8 +151,8 @@
         }
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
             margin-bottom: 3rem;
         }
 
@@ -164,10 +164,9 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             border: 3px solid var(--neon-green);
             position: relative;
-            transform: scale(1.05);
             transition: transform 0.3s;
         }
-        .card-featured:hover { transform: scale(1.08); }
+        .card-featured:hover { transform: translateY(-8px); }
         .featured-badge {
             position: absolute;
             top: 15px;
@@ -183,24 +182,28 @@
         }
         .card-featured .card-img {
             width: 100%;
-            height: 320px;
+            height: 200px; /* ✅ REDUZIDO DE 320px PARA 200px */
             background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
+            padding: 1rem;
         }
         .card-featured .card-img img {
-            width: 100%;
+            width: auto;
             height: 100%;
-            object-fit: cover;
+            max-width: 100%;
+            object-fit: contain; /* ✅ MUDADO DE cover PARA contain */
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
-        .card-featured .card-body { padding: 2rem; }
+        .card-featured .card-body { padding: 1.5rem; }
         .card-featured .card-title {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             color: var(--primary);
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             font-weight: 800;
         }
         .card-featured .modules-tag {
@@ -211,39 +214,39 @@
             border-radius: 50px;
             font-weight: 700;
             font-size: 0.85rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
         }
         .card-featured .price {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 900;
             color: var(--success);
-            margin: 1rem 0;
+            margin: 0.75rem 0;
             display: flex;
             align-items: center;
             gap: 0.3rem;
         }
         .card-featured .price small {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 400;
             color: var(--text-light);
         }
         .card-featured .card-btn {
             display: block;
             width: 100%;
-            padding: 1.1rem;
+            padding: 0.9rem;
             background: linear-gradient(135deg, var(--success), #059669);
             color: white;
             text-align: center;
             text-decoration: none;
             border-radius: var(--radius);
-            font-weight: 800;
-            font-size: 1.1rem;
+            font-weight: 700;
+            font-size: 1rem;
             transition: all 0.3s;
             box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
         }
         .card-featured .card-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
         }
 
         /* CARD NORMAL */
@@ -256,54 +259,58 @@
             border: 2px solid transparent;
         }
         .card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-6px);
             box-shadow: var(--shadow-hover);
             border-color: var(--kiwify);
         }
         .card .card-img {
             width: 100%;
-            height: 280px;
+            height: 160px; /* ✅ REDUZIDO DE 280px PARA 160px */
             background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            padding: 1rem;
         }
         .card .card-img img {
-            width: 100%;
+            width: auto;
             height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s;
+            max-width: 100%;
+            object-fit: contain; /* ✅ MUDADO DE cover PARA contain */
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
-        .card:hover .card-img img { transform: scale(1.05); }
-        .card .card-body { padding: 1.75rem; }
+        .card .card-body { padding: 1.25rem; }
         .card .card-title {
-            font-size: 1.3rem;
+            font-size: 1.15rem;
             color: var(--primary);
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.6rem;
             font-weight: 700;
         }
         .card .card-desc {
             color: var(--text-light);
-            margin-bottom: 1.25rem;
-            line-height: 1.7;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
         }
         .card .price {
-            font-size: 2rem;
+            font-size: 1.6rem;
             font-weight: 800;
             color: var(--kiwify);
-            margin: 1rem 0;
+            margin: 0.75rem 0;
         }
         .card .card-btn {
             display: block;
             width: 100%;
-            padding: 0.9rem;
+            padding: 0.8rem;
             background: var(--primary);
             color: white;
             text-align: center;
             text-decoration: none;
             border-radius: var(--radius);
             font-weight: 700;
+            font-size: 0.95rem;
             transition: all 0.3s;
         }
         .card .card-btn:hover {
@@ -314,7 +321,7 @@
         /* AFFILIATES */
         .affiliate-box {
             background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(240,249,255,0.98) 100%);
-            padding: 3rem 2rem;
+            padding: 2.5rem 1.5rem;
             border-radius: var(--radius);
             text-align: center;
             margin: 3rem auto;
@@ -324,12 +331,12 @@
         .affiliate-box h2 {
             color: var(--primary);
             margin-bottom: 1rem;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
         }
         .affiliate-box p {
             color: var(--text);
             margin-bottom: 1.5rem;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
         }
 
         /* FOOTER */
@@ -372,10 +379,12 @@
         .whatsapp-float:hover { transform: scale(1.1); }
 
         @media (max-width: 768px) {
-            .grid { grid-template-columns: 1fr; gap: 2rem; }
-            .card-featured { transform: scale(1); order: -1; }
-            .card-featured:hover { transform: scale(1.02); }
+            .grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .card-featured { order: -1; }
             .nav-links { display: none; }
+            .hero h1 { font-size: 1.8rem; }
+            .card-featured .card-img { height: 160px; }
+            .card .card-img { height: 140px; }
         }
     </style>
 </head>
@@ -489,12 +498,12 @@
                             <div class="card-img">
                                 <img src="${CONFIG.pastaImagens}${ebook.capa}" 
                                      alt="${ebook.titulo}"
-                                     onerror="this.src='https://placehold.co/600x800/1e3a8a/ffffff?text=${encodeURIComponent(ebook.titulo)}'">
+                                     onerror="this.src='https://placehold.co/400x500/1e3a8a/ffffff?text=${encodeURIComponent(ebook.titulo)}'">
                             </div>
                             <div class="card-body">
                                 ${ebook.modulos ? `<span class="modules-tag">📦 ${ebook.modulos}</span>` : ''}
                                 <h3 class="card-title">${ebook.titulo}</h3>
-                                <p style="color: var(--text-light); font-style: italic; margin-bottom: 1rem;">${ebook.subtitulo}</p>
+                                <p style="color: var(--text-light); font-style: italic; margin-bottom: 0.75rem; font-size: 0.95rem;">${ebook.subtitulo}</p>
                                 <p class="card-desc">${ebook.descricao}</p>
                                 <div class="price">${precoFormatado} <small>à vista</small></div>
                                 <a href="${ebook.link}" class="card-btn" target="_blank">🔥 COMPRAR AGORA →</a>
@@ -507,12 +516,12 @@
                             <div class="card-img">
                                 <img src="${CONFIG.pastaImagens}${ebook.capa}" 
                                      alt="${ebook.titulo}"
-                                     onerror="this.src='https://placehold.co/600x800/7c3aed/ffffff?text=${encodeURIComponent(ebook.titulo)}'">
+                                     onerror="this.src='https://placehold.co/400x500/7c3aed/ffffff?text=${encodeURIComponent(ebook.titulo)}'">
                             </div>
                             <div class="card-body">
                                 ${ebook.tag ? `<span style="display:inline-block; background: var(--kiwify); color: white; padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.8rem; font-weight: 700; margin-bottom: 0.75rem;">${ebook.tag}</span>` : ''}
                                 <h3 class="card-title">${ebook.titulo}</h3>
-                                <p style="color: var(--text-light); font-style: italic; font-size: 0.95rem; margin-bottom: 0.75rem;">${ebook.subtitulo}</p>
+                                <p style="color: var(--text-light); font-style: italic; font-size: 0.9rem; margin-bottom: 0.6rem;">${ebook.subtitulo}</p>
                                 <p class="card-desc">${ebook.descricao}</p>
                                 <div class="price">${precoFormatado}</div>
                                 <a href="${ebook.link}" class="card-btn" target="_blank">Comprar Agora</a>
